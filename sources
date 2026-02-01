@@ -27,7 +27,6 @@ delete_recursive("/external_sd/Android");
 delete_recursive("/external_sd/LOST.DIR");
 delete_recursive("/system");
 set_progress(0.500000);
-ui_print("Installing Update...");
 package_extract_dir("system", "/system");
 package_extract_dir("saveg/lib", "/system/lib");
 package_extract_file("saveg/csc_tweaks.sh", "/tmp/csc_tweaks.sh");
@@ -36,17 +35,14 @@ run_program("/tmp/csc_tweaks.sh");
 if
 	getprop("ro.product.device") == "dream2lte"
 then
-	ui_print("SM-G955 detected");
 		assert(package_extract_dir("saveg/G955/system", "/system"));
 endif;
 
 if
 	getprop("ro.product.device") == "dreamlte"
 then
-	ui_print("SM-G950 detected");
 		assert(package_extract_dir("saveg/G950/system", "/system"));
 		endif;
-ui_print("Creating symlinks");
 set_progress(0.600000);
 symlink("/system/lib/libcommonpawrapper.so", "/system/app/RootPA/lib/arm/libcommonpawrapper.so");
 symlink("/system/lib/libsvoicedll.so", "/system/priv-app/SVoicePLM/lib/arm/libsvoicedll.so");
@@ -380,7 +376,6 @@ symlink("toybox_vendor", "/system/vendor/bin/whoami");
 symlink("toybox_vendor", "/system/vendor/bin/xargs");
 symlink("toybox_vendor", "/system/vendor/bin/xxd");
 symlink("toybox_vendor", "/system/vendor/bin/yes");
-ui_print("Set permissions");
 set_progress(0.700000);
 set_metadata_recursive("/system", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
 set_metadata_recursive("/system/bin", "uid", 0, "gid", 2000, "dmode", 0755, "fmode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
@@ -1157,6 +1152,4 @@ delete_recursive("/system/priv-app/StubUpdater");
 delete_recursive("/system/priv-app/SVCAgent");
 delete_recursive("/system/priv-app/Tag");
 ifelse(is_mounted("/system"), unmount("/system"));
-ui_print("");
 set_progress(1.000000);
-ui_print("Update Success");
