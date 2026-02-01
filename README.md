@@ -12,7 +12,7 @@ The goal of this project is not just to redistribute a ROM, but to improve, opti
 
 🔧 What This Project Is About :
 
-This ROM started from an existing Samsung Experience base, which I then rebuilt and reconfigured to better suit daily use and long-term stability. My work focuses on:
+This ROM focuses on:
 
 System optimizations
 
