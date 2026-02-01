@@ -30,10 +30,6 @@ This means the system uses core Google apps for everyday functionality, reducing
 
 Additionally, the Google Play Store is already integrated into the ROM, allowing users to download apps immediately after setup without needing to flash additional packages.
 
-This approach ensures a lighter system while keeping full access to the essential Google services and ecosystem.
-
-Rather than changing the identity of Samsung Experience, this project aims to refine it, making it feel lighter, faster, and more efficient while keeping the classic Samsung look and features.
-
 ✨ Key Improvements :
 
 Compared to the original base ROM, this version includes:
@@ -51,8 +47,6 @@ Improved touch responsiveness and UI fluidity
 General stability improvements for daily use
 
 Various small tweaks and refinements throughout the system
-
-Every change is made with the intention of keeping the ROM stable and reliable while enhancing the user experience.
 
 🎯 Project Philosophy : 
 
