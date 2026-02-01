@@ -1,3 +1,7 @@
+Android version : 8.0.0
+Samsung Experience version : 9
+Android Security Patch Level : January 2026
+
 Samsung Experience Reworked ROM for Galaxy S8 (Exynos) :
 
 This project is a reworked and customized version of a Samsung Experience–based ROM for the Samsung Galaxy S8 (Exynos models). I have taken an existing Samsung Experience ROM as a base and carefully adapted, modified, and refined it to match my own vision of performance, stability, and user experience.
@@ -62,7 +66,5 @@ This is not meant to be an extreme modification or a heavily themed ROM. Instead
 Samsung Galaxy S8 (Exynos variants)
 
 ⚠️ Disclaimer :
-This is a custom ROM and is provided as-is. Flashing custom firmware always carries some risk. Make sure to create a full backup before installing.
-a changelog template
 
-or release notes style text for your updates
+This is a custom ROM and is provided as-is. Flashing custom firmware always carries some risk. Make sure to create a full backup before installing.
