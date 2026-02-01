@@ -57,11 +57,8 @@ Every change is made with the intention of keeping the ROM stable and reliable w
 🎯 Project Philosophy : 
 
 The philosophy behind this ROM is simple:
+
 Keep the Samsung Experience feel, but make it better.
-
-I focus on maintaining compatibility and stability while applying thoughtful improvements that enhance performance and usability without breaking core features.
-
-This is not meant to be an extreme modification or a heavily themed ROM. Instead, it is a refined and optimized Samsung Experience build designed to feel polished and practical for everyday use.
 
 📱 Supported Device :
 
