@@ -1,0 +1,1169 @@
+ui_print(" ");
+ui_print(" ");
+ui_print(" ");
+ui_print("Rom Date : 2026-02-01");
+ui_print("Based on G950FXXU1EKDM for SAMSUNG GALAXY S8 G950F/FD");
+ifelse(is_mounted("/system"), unmount("/system"));
+ifelse(is_mounted("/data"), unmount("/data"));
+ifelse(is_mounted("/cache"), unmount("/cache"));
+show_progress(1.000000, 0);
+mount("ext4", "EMMC", "/dev/block/platform/11120000.ufs/by-name/SYSTEM", "/system");
+mount("ext4", "EMMC", "/dev/block/platform/11120000.ufs/by-name/USERDATA", "/data");
+mount("ext4", "EMMC", "/dev/block/platform/11120000.ufs/by-name/CACHE", "/cache");
+ui_print("Checking System...");
+set_progress(0.100000);
+delete_recursive("/cache");
+delete_recursive("/data/dalvik-cache");
+set_progress(0.200000);
+delete_recursive("/magisk");
+delete_recursive("/supersu");
+delete_recursive("/su");
+set_progress(0.300000);
+delete_recursive("/sdcard/.android_secure");
+delete_recursive("/sdcard/.cloudagent");
+delete_recursive("/sdcard/.face");
+delete_recursive("/sdcard/3Minit Downloads");
+delete_recursive("/sdcard/3MinitBatteryIcons");
+delete_recursive("/sdcard/3MinitBatterySettings");
+delete_recursive("/sdcard/Android");
+delete_recursive("/sdcard/LOST.DIR");
+set_progress(0.400000);
+delete_recursive("/external_sd/.android_secure");
+delete_recursive("/external_sd/Android");
+delete_recursive("/external_sd/LOST.DIR");
+delete_recursive("/system");
+set_progress(0.500000);
+ui_print("Installing Update...");
+package_extract_dir("system", "/system");
+package_extract_dir("saveg/lib", "/system/lib");
+package_extract_file("saveg/csc_tweaks.sh", "/tmp/csc_tweaks.sh");
+set_perm(0, 0, 0777, "/tmp/csc_tweaks.sh");
+run_program("/tmp/csc_tweaks.sh");
+if
+	getprop("ro.product.device") == "dream2lte"
+then
+	ui_print("SM-G955 detected");
+		assert(package_extract_dir("saveg/G955/system", "/system"));
+endif;
+
+if
+	getprop("ro.product.device") == "dreamlte"
+then
+	ui_print("SM-G950 detected");
+		assert(package_extract_dir("saveg/G950/system", "/system"));
+		endif;
+ui_print("Creating symlinks");
+set_progress(0.600000);
+symlink("/system/lib/libcommonpawrapper.so", "/system/app/RootPA/lib/arm/libcommonpawrapper.so");
+symlink("/system/lib/libsvoicedll.so", "/system/priv-app/SVoicePLM/lib/arm/libsvoicedll.so");
+symlink("/system/lib64/libPSI.so", "/system/app/sveservice/lib/arm64/libPSI.so");
+symlink("/system/lib64/libTui.so", "/system/app/TuiService/lib/arm64/libTui.so");
+symlink("/system/lib64/libbluetooth_jni.so", "/system/app/Bluetooth/lib/arm64/libbluetooth_jni.so");
+symlink("/system/lib64/libcups.so", "/system/app/BuiltInPrintService/lib/arm64/libcups.so");
+symlink("/system/lib64/libdefcontainer_jni.so", "/system/priv-app/DefaultContainerService/lib/arm64/libdefcontainer_jni.so");
+symlink("/system/lib64/libjni_pacprocessor.so", "/system/app/PacProcessor/lib/arm64/libjni_pacprocessor.so");
+symlink("/system/lib64/libnfc_nci_jni.so", "/system/app/NfcNci/lib/arm64/libnfc_nci_jni.so");
+symlink("/system/lib64/libprintspooler_jniO.so", "/system/app/SPrintSpooler/lib/arm64/libprintspooler_jniO.so");
+symlink("/system/lib64/librtp.so", "/system/app/sveservice/lib/arm64/librtp.so");
+symlink("/system/lib64/librtppayload.so", "/system/app/sveservice/lib/arm64/librtppayload.so");
+symlink("/system/lib64/libsamsung_videoengine_8_0.so", "/system/app/sveservice/lib/arm64/libsamsung_videoengine_8_0.so");
+symlink("/system/lib64/libsec-ims.so", "/system/priv-app/imsservice/lib/arm64/libsec-ims.so");
+symlink("/system/lib64/libsisosrtp.so", "/system/app/sveservice/lib/arm64/libsisosrtp.so");
+symlink("/system/lib64/libsvejni.so", "/system/app/sveservice/lib/arm64/libsvejni.so");
+symlink("/system/lib64/libwfds.so", "/system/app/BuiltInPrintService/lib/arm64/libwfds.so");
+symlink("/vendor/lib/egl/libGLES_mali.so", "/system/vendor/lib/hw/vulkan.exynos5.so");
+symlink("/vendor/lib/egl/libGLES_mali.so", "/system/vendor/lib/libOpenCL.so.1.1");
+symlink("/vendor/lib64/egl/libGLES_mali.so", "/system/vendor/lib64/hw/vulkan.exynos5.so");
+symlink("/vendor/lib64/egl/libGLES_mali.so", "/system/vendor/lib64/libOpenCL.so.1.1");
+symlink("Roboto-Bold.ttf", "/system/fonts/DroidSans-Bold.ttf");
+symlink("Roboto-Medium.ttf", "/system/fonts/SECRobotoLight-Bold.ttf");
+symlink("Roboto-Regular.ttf", "/system/fonts/DroidSans.ttf");
+symlink("Roboto-Regular.ttf", "/system/fonts/SECRobotoLight-Regular.ttf");
+symlink("app_process64", "/system/bin/app_process");
+symlink("bzip2", "/system/bin/bunzip2");
+symlink("bzip2", "/system/bin/bzcat");
+symlink("dalvikvm64", "/system/bin/dalvikvm");
+symlink("grep", "/system/bin/egrep");
+symlink("grep", "/system/bin/fgrep");
+symlink("ip6tables", "/system/bin/ip6tables-restore");
+symlink("ip6tables", "/system/bin/ip6tables-save");
+symlink("iptables", "/system/bin/iptables-restore");
+symlink("iptables", "/system/bin/iptables-save");
+symlink("libOpenCL.so.1", "/system/vendor/lib/libOpenCL.so");
+symlink("libOpenCL.so.1", "/system/vendor/lib64/libOpenCL.so");
+symlink("libOpenCL.so.1.1", "/system/vendor/lib/libOpenCL.so.1");
+symlink("libOpenCL.so.1.1", "/system/vendor/lib64/libOpenCL.so.1");
+symlink("linker", "/system/bin/linker_asan");
+symlink("linker64", "/system/bin/linker_asan64");
+symlink("toolbox", "/system/bin/dd");
+symlink("toolbox", "/system/bin/getevent");
+symlink("toolbox", "/system/bin/newfs_msdos");
+symlink("toybox", "/system/bin/acpi");
+symlink("toybox", "/system/bin/base64");
+symlink("toybox", "/system/bin/basename");
+symlink("toybox", "/system/bin/blockdev");
+symlink("toybox", "/system/bin/cal");
+symlink("toybox", "/system/bin/cat");
+symlink("toybox", "/system/bin/chcon");
+symlink("toybox", "/system/bin/chgrp");
+symlink("toybox", "/system/bin/chmod");
+symlink("toybox", "/system/bin/chown");
+symlink("toybox", "/system/bin/chroot");
+symlink("toybox", "/system/bin/chrt");
+symlink("toybox", "/system/bin/cksum");
+symlink("toybox", "/system/bin/clear");
+symlink("toybox", "/system/bin/cmp");
+symlink("toybox", "/system/bin/comm");
+symlink("toybox", "/system/bin/cp");
+symlink("toybox", "/system/bin/cpio");
+symlink("toybox", "/system/bin/cut");
+symlink("toybox", "/system/bin/date");
+symlink("toybox", "/system/bin/df");
+symlink("toybox", "/system/bin/dirname");
+symlink("toybox", "/system/bin/dmesg");
+symlink("toybox", "/system/bin/dos2unix");
+symlink("toybox", "/system/bin/du");
+symlink("toybox", "/system/bin/echo");
+symlink("toybox", "/system/bin/env");
+symlink("toybox", "/system/bin/expand");
+symlink("toybox", "/system/bin/expr");
+symlink("toybox", "/system/bin/fallocate");
+symlink("toybox", "/system/bin/false");
+symlink("toybox", "/system/bin/file");
+symlink("toybox", "/system/bin/find");
+symlink("toybox", "/system/bin/flock");
+symlink("toybox", "/system/bin/free");
+symlink("toybox", "/system/bin/getenforce");
+symlink("toybox", "/system/bin/getprop");
+symlink("toybox", "/system/bin/groups");
+symlink("toybox", "/system/bin/head");
+symlink("toybox", "/system/bin/hostname");
+symlink("toybox", "/system/bin/hwclock");
+symlink("toybox", "/system/bin/id");
+symlink("toybox", "/system/bin/ifconfig");
+symlink("toybox", "/system/bin/inotifyd");
+symlink("toybox", "/system/bin/insmod");
+symlink("toybox", "/system/bin/ionice");
+symlink("toybox", "/system/bin/iorenice");
+symlink("toybox", "/system/bin/kill");
+symlink("toybox", "/system/bin/killall");
+symlink("toybox", "/system/bin/ln");
+symlink("toybox", "/system/bin/load_policy");
+symlink("toybox", "/system/bin/log");
+symlink("toybox", "/system/bin/logname");
+symlink("toybox", "/system/bin/losetup");
+symlink("toybox", "/system/bin/ls");
+symlink("toybox", "/system/bin/lsmod");
+symlink("toybox", "/system/bin/lsof");
+symlink("toybox", "/system/bin/lsusb");
+symlink("toybox", "/system/bin/md5sum");
+symlink("toybox", "/system/bin/microcom");
+symlink("toybox", "/system/bin/mkdir");
+symlink("toybox", "/system/bin/mknod");
+symlink("toybox", "/system/bin/mkswap");
+symlink("toybox", "/system/bin/mktemp");
+symlink("toybox", "/system/bin/modinfo");
+symlink("toybox", "/system/bin/modprobe");
+symlink("toybox", "/system/bin/more");
+symlink("toybox", "/system/bin/mount");
+symlink("toybox", "/system/bin/mountpoint");
+symlink("toybox", "/system/bin/mv");
+symlink("toybox", "/system/bin/netstat");
+symlink("toybox", "/system/bin/nice");
+symlink("toybox", "/system/bin/nl");
+symlink("toybox", "/system/bin/nohup");
+symlink("toybox", "/system/bin/od");
+symlink("toybox", "/system/bin/paste");
+symlink("toybox", "/system/bin/patch");
+symlink("toybox", "/system/bin/pgrep");
+symlink("toybox", "/system/bin/pidof");
+symlink("toybox", "/system/bin/pkill");
+symlink("toybox", "/system/bin/pmap");
+symlink("toybox", "/system/bin/printenv");
+symlink("toybox", "/system/bin/printf");
+symlink("toybox", "/system/bin/ps");
+symlink("toybox", "/system/bin/pwd");
+symlink("toybox", "/system/bin/readlink");
+symlink("toybox", "/system/bin/realpath");
+symlink("toybox", "/system/bin/renice");
+symlink("toybox", "/system/bin/restorecon");
+symlink("toybox", "/system/bin/rm");
+symlink("toybox", "/system/bin/rmdir");
+symlink("toybox", "/system/bin/rmmod");
+symlink("toybox", "/system/bin/runcon");
+symlink("toybox", "/system/bin/sed");
+symlink("toybox", "/system/bin/sendevent");
+symlink("toybox", "/system/bin/seq");
+symlink("toybox", "/system/bin/setenforce");
+symlink("toybox", "/system/bin/setprop");
+symlink("toybox", "/system/bin/setsid");
+symlink("toybox", "/system/bin/sha1sum");
+symlink("toybox", "/system/bin/sha224sum");
+symlink("toybox", "/system/bin/sha256sum");
+symlink("toybox", "/system/bin/sha384sum");
+symlink("toybox", "/system/bin/sha512sum");
+symlink("toybox", "/system/bin/sleep");
+symlink("toybox", "/system/bin/sort");
+symlink("toybox", "/system/bin/split");
+symlink("toybox", "/system/bin/start");
+symlink("toybox", "/system/bin/stat");
+symlink("toybox", "/system/bin/stop");
+symlink("toybox", "/system/bin/strings");
+symlink("toybox", "/system/bin/swapoff");
+symlink("toybox", "/system/bin/swapon");
+symlink("toybox", "/system/bin/sync");
+symlink("toybox", "/system/bin/sysctl");
+symlink("toybox", "/system/bin/tac");
+symlink("toybox", "/system/bin/tail");
+symlink("toybox", "/system/bin/tar");
+symlink("toybox", "/system/bin/taskset");
+symlink("toybox", "/system/bin/tee");
+symlink("toybox", "/system/bin/time");
+symlink("toybox", "/system/bin/timeout");
+symlink("toybox", "/system/bin/top");
+symlink("toybox", "/system/bin/touch");
+symlink("toybox", "/system/bin/tr");
+symlink("toybox", "/system/bin/true");
+symlink("toybox", "/system/bin/truncate");
+symlink("toybox", "/system/bin/tty");
+symlink("toybox", "/system/bin/ulimit");
+symlink("toybox", "/system/bin/umount");
+symlink("toybox", "/system/bin/uname");
+symlink("toybox", "/system/bin/uniq");
+symlink("toybox", "/system/bin/unix2dos");
+symlink("toybox", "/system/bin/uptime");
+symlink("toybox", "/system/bin/usleep");
+symlink("toybox", "/system/bin/uudecode");
+symlink("toybox", "/system/bin/uuencode");
+symlink("toybox", "/system/bin/vmstat");
+symlink("toybox", "/system/bin/wc");
+symlink("toybox", "/system/bin/which");
+symlink("toybox", "/system/bin/whoami");
+symlink("toybox", "/system/bin/xargs");
+symlink("toybox", "/system/bin/xxd");
+symlink("toybox", "/system/bin/yes");
+symlink("toybox_vendor", "/system/vendor/bin/acpi");
+symlink("toybox_vendor", "/system/vendor/bin/base64");
+symlink("toybox_vendor", "/system/vendor/bin/basename");
+symlink("toybox_vendor", "/system/vendor/bin/blockdev");
+symlink("toybox_vendor", "/system/vendor/bin/cal");
+symlink("toybox_vendor", "/system/vendor/bin/cat");
+symlink("toybox_vendor", "/system/vendor/bin/chcon");
+symlink("toybox_vendor", "/system/vendor/bin/chgrp");
+symlink("toybox_vendor", "/system/vendor/bin/chmod");
+symlink("toybox_vendor", "/system/vendor/bin/chown");
+symlink("toybox_vendor", "/system/vendor/bin/chroot");
+symlink("toybox_vendor", "/system/vendor/bin/chrt");
+symlink("toybox_vendor", "/system/vendor/bin/cksum");
+symlink("toybox_vendor", "/system/vendor/bin/clear");
+symlink("toybox_vendor", "/system/vendor/bin/cmp");
+symlink("toybox_vendor", "/system/vendor/bin/comm");
+symlink("toybox_vendor", "/system/vendor/bin/cp");
+symlink("toybox_vendor", "/system/vendor/bin/cpio");
+symlink("toybox_vendor", "/system/vendor/bin/cut");
+symlink("toybox_vendor", "/system/vendor/bin/date");
+symlink("toybox_vendor", "/system/vendor/bin/df");
+symlink("toybox_vendor", "/system/vendor/bin/dirname");
+symlink("toybox_vendor", "/system/vendor/bin/dmesg");
+symlink("toybox_vendor", "/system/vendor/bin/dos2unix");
+symlink("toybox_vendor", "/system/vendor/bin/du");
+symlink("toybox_vendor", "/system/vendor/bin/echo");
+symlink("toybox_vendor", "/system/vendor/bin/env");
+symlink("toybox_vendor", "/system/vendor/bin/expand");
+symlink("toybox_vendor", "/system/vendor/bin/expr");
+symlink("toybox_vendor", "/system/vendor/bin/fallocate");
+symlink("toybox_vendor", "/system/vendor/bin/false");
+symlink("toybox_vendor", "/system/vendor/bin/file");
+symlink("toybox_vendor", "/system/vendor/bin/find");
+symlink("toybox_vendor", "/system/vendor/bin/flock");
+symlink("toybox_vendor", "/system/vendor/bin/free");
+symlink("toybox_vendor", "/system/vendor/bin/getenforce");
+symlink("toybox_vendor", "/system/vendor/bin/getprop");
+symlink("toybox_vendor", "/system/vendor/bin/groups");
+symlink("toybox_vendor", "/system/vendor/bin/head");
+symlink("toybox_vendor", "/system/vendor/bin/hostname");
+symlink("toybox_vendor", "/system/vendor/bin/hwclock");
+symlink("toybox_vendor", "/system/vendor/bin/id");
+symlink("toybox_vendor", "/system/vendor/bin/ifconfig");
+symlink("toybox_vendor", "/system/vendor/bin/inotifyd");
+symlink("toybox_vendor", "/system/vendor/bin/insmod");
+symlink("toybox_vendor", "/system/vendor/bin/ionice");
+symlink("toybox_vendor", "/system/vendor/bin/iorenice");
+symlink("toybox_vendor", "/system/vendor/bin/kill");
+symlink("toybox_vendor", "/system/vendor/bin/killall");
+symlink("toybox_vendor", "/system/vendor/bin/ln");
+symlink("toybox_vendor", "/system/vendor/bin/load_policy");
+symlink("toybox_vendor", "/system/vendor/bin/log");
+symlink("toybox_vendor", "/system/vendor/bin/logname");
+symlink("toybox_vendor", "/system/vendor/bin/losetup");
+symlink("toybox_vendor", "/system/vendor/bin/ls");
+symlink("toybox_vendor", "/system/vendor/bin/lsmod");
+symlink("toybox_vendor", "/system/vendor/bin/lsof");
+symlink("toybox_vendor", "/system/vendor/bin/lsusb");
+symlink("toybox_vendor", "/system/vendor/bin/md5sum");
+symlink("toybox_vendor", "/system/vendor/bin/microcom");
+symlink("toybox_vendor", "/system/vendor/bin/mkdir");
+symlink("toybox_vendor", "/system/vendor/bin/mknod");
+symlink("toybox_vendor", "/system/vendor/bin/mkswap");
+symlink("toybox_vendor", "/system/vendor/bin/mktemp");
+symlink("toybox_vendor", "/system/vendor/bin/modinfo");
+symlink("toybox_vendor", "/system/vendor/bin/modprobe");
+symlink("toybox_vendor", "/system/vendor/bin/more");
+symlink("toybox_vendor", "/system/vendor/bin/mount");
+symlink("toybox_vendor", "/system/vendor/bin/mountpoint");
+symlink("toybox_vendor", "/system/vendor/bin/mv");
+symlink("toybox_vendor", "/system/vendor/bin/netstat");
+symlink("toybox_vendor", "/system/vendor/bin/nice");
+symlink("toybox_vendor", "/system/vendor/bin/nl");
+symlink("toybox_vendor", "/system/vendor/bin/nohup");
+symlink("toybox_vendor", "/system/vendor/bin/od");
+symlink("toybox_vendor", "/system/vendor/bin/paste");
+symlink("toybox_vendor", "/system/vendor/bin/patch");
+symlink("toybox_vendor", "/system/vendor/bin/pgrep");
+symlink("toybox_vendor", "/system/vendor/bin/pidof");
+symlink("toybox_vendor", "/system/vendor/bin/pkill");
+symlink("toybox_vendor", "/system/vendor/bin/pmap");
+symlink("toybox_vendor", "/system/vendor/bin/printenv");
+symlink("toybox_vendor", "/system/vendor/bin/printf");
+symlink("toybox_vendor", "/system/vendor/bin/ps");
+symlink("toybox_vendor", "/system/vendor/bin/pwd");
+symlink("toybox_vendor", "/system/vendor/bin/readlink");
+symlink("toybox_vendor", "/system/vendor/bin/realpath");
+symlink("toybox_vendor", "/system/vendor/bin/renice");
+symlink("toybox_vendor", "/system/vendor/bin/restorecon");
+symlink("toybox_vendor", "/system/vendor/bin/rm");
+symlink("toybox_vendor", "/system/vendor/bin/rmdir");
+symlink("toybox_vendor", "/system/vendor/bin/rmmod");
+symlink("toybox_vendor", "/system/vendor/bin/runcon");
+symlink("toybox_vendor", "/system/vendor/bin/sed");
+symlink("toybox_vendor", "/system/vendor/bin/sendevent");
+symlink("toybox_vendor", "/system/vendor/bin/seq");
+symlink("toybox_vendor", "/system/vendor/bin/setenforce");
+symlink("toybox_vendor", "/system/vendor/bin/setprop");
+symlink("toybox_vendor", "/system/vendor/bin/setsid");
+symlink("toybox_vendor", "/system/vendor/bin/sha1sum");
+symlink("toybox_vendor", "/system/vendor/bin/sha224sum");
+symlink("toybox_vendor", "/system/vendor/bin/sha256sum");
+symlink("toybox_vendor", "/system/vendor/bin/sha384sum");
+symlink("toybox_vendor", "/system/vendor/bin/sha512sum");
+symlink("toybox_vendor", "/system/vendor/bin/sleep");
+symlink("toybox_vendor", "/system/vendor/bin/sort");
+symlink("toybox_vendor", "/system/vendor/bin/split");
+symlink("toybox_vendor", "/system/vendor/bin/start");
+symlink("toybox_vendor", "/system/vendor/bin/stat");
+symlink("toybox_vendor", "/system/vendor/bin/stop");
+symlink("toybox_vendor", "/system/vendor/bin/strings");
+symlink("toybox_vendor", "/system/vendor/bin/swapoff");
+symlink("toybox_vendor", "/system/vendor/bin/swapon");
+symlink("toybox_vendor", "/system/vendor/bin/sync");
+symlink("toybox_vendor", "/system/vendor/bin/sysctl");
+symlink("toybox_vendor", "/system/vendor/bin/tac");
+symlink("toybox_vendor", "/system/vendor/bin/tail");
+symlink("toybox_vendor", "/system/vendor/bin/tar");
+symlink("toybox_vendor", "/system/vendor/bin/taskset");
+symlink("toybox_vendor", "/system/vendor/bin/tee");
+symlink("toybox_vendor", "/system/vendor/bin/time");
+symlink("toybox_vendor", "/system/vendor/bin/timeout");
+symlink("toybox_vendor", "/system/vendor/bin/top");
+symlink("toybox_vendor", "/system/vendor/bin/touch");
+symlink("toybox_vendor", "/system/vendor/bin/tr");
+symlink("toybox_vendor", "/system/vendor/bin/true");
+symlink("toybox_vendor", "/system/vendor/bin/truncate");
+symlink("toybox_vendor", "/system/vendor/bin/tty");
+symlink("toybox_vendor", "/system/vendor/bin/ulimit");
+symlink("toybox_vendor", "/system/vendor/bin/umount");
+symlink("toybox_vendor", "/system/vendor/bin/uname");
+symlink("toybox_vendor", "/system/vendor/bin/uniq");
+symlink("toybox_vendor", "/system/vendor/bin/unix2dos");
+symlink("toybox_vendor", "/system/vendor/bin/uptime");
+symlink("toybox_vendor", "/system/vendor/bin/usleep");
+symlink("toybox_vendor", "/system/vendor/bin/uudecode");
+symlink("toybox_vendor", "/system/vendor/bin/uuencode");
+symlink("toybox_vendor", "/system/vendor/bin/vmstat");
+symlink("toybox_vendor", "/system/vendor/bin/wc");
+symlink("toybox_vendor", "/system/vendor/bin/which");
+symlink("toybox_vendor", "/system/vendor/bin/whoami");
+symlink("toybox_vendor", "/system/vendor/bin/xargs");
+symlink("toybox_vendor", "/system/vendor/bin/xxd");
+symlink("toybox_vendor", "/system/vendor/bin/yes");
+ui_print("Set permissions");
+set_progress(0.700000);
+set_metadata_recursive("/system", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata_recursive("/system/bin", "uid", 0, "gid", 2000, "dmode", 0755, "fmode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/am", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/androidshmservice", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:androidshmservice_exec:s0");
+set_metadata("/system/bin/apaservice", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:apaservice_exec:s0");
+set_metadata("/system/bin/apexserver", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:apexserver_exec:s0");
+set_metadata("/system/bin/app_process32", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:zygote_exec:s0");
+set_metadata("/system/bin/app_process64", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:zygote_exec:s0");
+set_metadata("/system/bin/applypatch", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/appops", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/appwidget", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/atrace", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:atrace_exec:s0");
+set_metadata("/system/bin/audioserver", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:audioserver_exec:s0");
+set_metadata("/system/bin/auditd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:auditd_exec:s0");
+set_metadata("/system/bin/bcc", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/blkid", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:blkid_exec:s0");
+set_metadata("/system/bin/bmgr", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/bootanimation", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:bootanim_exec:s0");
+set_metadata("/system/bin/bootchecker", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:bootchecker_exec:s0");
+set_metadata("/system/bin/bootstat", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:bootstat_exec:s0");
+set_metadata("/system/bin/bsd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:bsd_exec:s0");
+set_metadata("/system/bin/bu", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/bugreport", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/bugreportz", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/bzip2", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/cameraserver", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:cameraserver_exec:s0");
+set_metadata("/system/bin/ccm_gen_cert", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/charon", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:charon_exec:s0");
+set_metadata("/system/bin/clatd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:clatd_exec:s0");
+set_metadata("/system/bin/cmd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/content", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/corehelper.sh", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:corehelper_sh_file:s0");
+set_metadata("/system/bin/crash_dump32", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:crash_dump_exec:s0");
+set_metadata("/system/bin/crash_dump64", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:crash_dump_exec:s0");
+set_metadata("/system/bin/dalvikvm32", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/dalvikvm64", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/debuggerd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/dex2oat", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:dex2oat_exec:s0");
+set_metadata("/system/bin/dexdiag", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/dexdump", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/dexlist", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/dexoptanalyzer", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:dexoptanalyzer_exec:s0");
+set_metadata("/system/bin/diagexe", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:dmd_exec:s0");
+set_metadata("/system/bin/dm_verity_tz_cmd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/dnsmasq", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:dnsmasq_exec:s0");
+set_metadata("/system/bin/dpm", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/drmserver", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:drmserver_exec:s0");
+set_metadata("/system/bin/dumpstate", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:dumpstate_exec:s0");
+set_metadata("/system/bin/dumpsys", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/e2fsck", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:fsck_exec:s0");
+set_metadata("/system/bin/edmaudit", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:edmaudit_exec:s0");
+set_metadata("/system/bin/epmlogd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:epmlogd_exec:s0");
+set_metadata("/system/bin/eris", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:eris_exec:s0");
+set_metadata("/system/bin/faced", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:faced_exec:s0");
+set_metadata("/system/bin/fsck.exfat", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:fsck_exec:s0");
+set_metadata("/system/bin/fsck.f2fs", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:fsck_exec:s0");
+set_metadata("/system/bin/fsck_msdos", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:fsck_exec:s0");
+set_metadata("/system/bin/gatekeeperd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:gatekeeperd_exec:s0");
+set_metadata("/system/bin/grep", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/gzip", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/healthd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:healthd_exec:s0");
+set_metadata("/system/bin/hid", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/hw", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/hw/android.hidl.allocator@1.0-service", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:hal_allocator_default_exec:s0");
+set_metadata("/system/bin/hwservicemanager", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:hwservicemanager_exec:s0");
+set_metadata("/system/bin/icd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:icd_exec:s0");
+set_metadata("/system/bin/idmap", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:idmap_exec:s0");
+set_metadata("/system/bin/ikev2-client", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:ikev2_client_exec:s0");
+set_metadata("/system/bin/ime", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/imsd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:imsd_exec:s0");
+set_metadata("/system/bin/incident", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:incident_exec:s0");
+set_metadata("/system/bin/incidentd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:incidentd_exec:s0");
+set_metadata("/system/bin/input", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/install-recovery.sh", "uid", 0, "gid", 0, "mode", 0544, "capabilities", 0x0, "selabel", "u:object_r:install_recovery_exec:s0");
+set_metadata("/system/bin/installd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:installd_exec:s0");
+set_metadata("/system/bin/insthk", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:insthk_exec:s0");
+set_metadata("/system/bin/iod", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:iod_exec:s0");
+set_metadata("/system/bin/ip", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/ip6tables", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/iptables", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/irisd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:irisd_exec:s0");
+set_metadata("/system/bin/jackd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/jackservice", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:jackservice_exec:s0");
+set_metadata("/system/bin/keystore", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:keystore_exec:s0");
+set_metadata("/system/bin/ld.mc", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/linker", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/linker64", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/lmkd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:lmkd_exec:s0");
+set_metadata("/system/bin/locksettings", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/logcat", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:logcat_exec:s0");
+set_metadata("/system/bin/logd", "uid", 1036, "gid", 1036, "mode", 0550, "capabilities", 0x440000040, "selabel", "u:object_r:logd_exec:s0");
+set_metadata("/system/bin/logwrapper", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/lpm", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:lpm_exec:s0");
+set_metadata("/system/bin/lshal", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/make_ext4fs", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/make_f2fs", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/mdf_fota", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/mdnsd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:mdnsd_exec:s0");
+set_metadata("/system/bin/media", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/mediadrmserver", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:mediadrmserver_exec:s0");
+set_metadata("/system/bin/mediaextractor", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:mediaextractor_exec:s0");
+set_metadata("/system/bin/mediametrics", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:mediametrics_exec:s0");
+set_metadata("/system/bin/mediaserver", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:mediaserver_exec:s0");
+set_metadata("/system/bin/mkfs.exfat", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:fsck_exec:s0");
+set_metadata("/system/bin/mlchecker", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/monkey", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/mtpd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:mtp_exec:s0");
+set_metadata("/system/bin/ndc", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/netd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:netd_exec:s0");
+set_metadata("/system/bin/oatdump", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/patchoat", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:dex2oat_exec:s0");
+set_metadata("/system/bin/ping", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/ping6", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/pm", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/pm_proxy_helper", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/pppd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:ppp_exec:s0");
+set_metadata("/system/bin/prepare_param.sh", "uid", 0, "gid", 2000, "mode", 0500, "capabilities", 0x0, "selabel", "u:object_r:prepare_param_sh_file:s0");
+set_metadata("/system/bin/profman", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:profman_exec:s0");
+set_metadata("/system/bin/qemu-props", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/qemud", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/racoon", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:racoon_exec:s0");
+set_metadata("/system/bin/reboot", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/redsocks", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:redsocks_exec:s0");
+set_metadata("/system/bin/remotedisplay", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:remotedisplay_exec:s0");
+set_metadata("/system/bin/requestsync", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/resetreason", "uid", 1000, "gid", 1000, "mode", 0710, "capabilities", 0x0, "selabel", "u:object_r:resetreason_exec:s0");
+set_metadata("/system/bin/resize2fs", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/run-as", "uid", 0, "gid", 2000, "mode", 0750, "capabilities", 0xc0, "selabel", "u:object_r:runas_exec:s0");
+set_metadata("/system/bin/samsungpowersoundplay", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:samsungpowersoundplay_exec:s0");
+set_metadata("/system/bin/schedtest", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/screencap", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/screenrecord", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/scs", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:scs_exec:s0");
+set_metadata("/system/bin/sdcard", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:sdcardd_exec:s0");
+set_metadata("/system/bin/sdp_cryptod", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:sdp_cryptod_exec:s0");
+set_metadata("/system/bin/secdiscard", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/secure_storage_daemon", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:secure_storage_exec:s0");
+set_metadata("/system/bin/secure_storage_pm", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/sem_daemon", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:sem_exec:s0");
+set_metadata("/system/bin/sensorservice", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/service", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/servicemanager", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:servicemanager_exec:s0");
+set_metadata("/system/bin/settings", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/sgdisk", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:sgdisk_exec:s0");
+set_metadata("/system/bin/sh", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:shell_exec:s0");
+set_metadata("/system/bin/sm", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/ss_conn_daemon", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:ss_conn_daemon_exec:s0");
+set_metadata("/system/bin/storaged", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:storaged_exec:s0");
+set_metadata("/system/bin/surfaceflinger", "uid", 1000, "gid", 1003, "mode", 0755, "capabilities", 0x800000, "selabel", "u:object_r:surfaceflinger_exec:s0");
+set_metadata("/system/bin/svc", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/tc", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/telecom", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/tlc_server", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:tlc_server_exec:s0");
+set_metadata("/system/bin/tombstoned", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:tombstoned_exec:s0");
+set_metadata("/system/bin/toolbox", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:toolbox_exec:s0");
+set_metadata("/system/bin/toybox", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:toolbox_exec:s0");
+set_metadata("/system/bin/tune2fs", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:fsck_exec:s0");
+set_metadata("/system/bin/tzdatacheck", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:tzdatacheck_exec:s0");
+set_metadata("/system/bin/uiautomator", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/uncrypt", "uid", 0, "gid", 0, "mode", 0750, "capabilities", 0x0, "selabel", "u:object_r:uncrypt_exec:s0");
+set_metadata("/system/bin/vaultkeeperd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:vaultkeeperd_exec:s0");
+set_metadata("/system/bin/vdc", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:vdc_exec:s0");
+set_metadata("/system/bin/visiond", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:visiond_exec:s0");
+set_metadata("/system/bin/vold", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:vold_exec:s0");
+set_metadata("/system/bin/vr", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/webview_zygote32", "uid", 0, "gid", 0, "mode", 0750, "capabilities", 0x1c0, "selabel", "u:object_r:webview_zygote_exec:s0");
+set_metadata("/system/bin/webview_zygote64", "uid", 0, "gid", 0, "mode", 0750, "capabilities", 0x1c0, "selabel", "u:object_r:webview_zygote_exec:s0");
+set_metadata("/system/bin/wificond", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:wificond_exec:s0");
+set_metadata("/system/bin/wlandutservice", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:wlandutservice_exec:s0");
+set_metadata("/system/bin/wm", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/wsmd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:wsmd_exec:s0");
+set_metadata("/system/bin/wvkprov", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/etc", "uid", 0, "gid", 0, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/etc/bluetooth", "uid", 0, "gid", 0, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/etc/bluetooth/bt_did.conf", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/etc/bluetooth/bt_stack.conf", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/recovery-from-boot.p", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/etc/event-log-tags", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata_recursive("/system/etc/firmware", "uid", 0, "gid", 2000, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/etc/init.goldfish.sh", "uid", 0, "gid", 2000, "mode", 0550, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/etc/init.sec.boot.sh", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:sec-sh_exec:s0");
+set_metadata("/system/etc/permissions", "uid", 0, "gid", 0, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata_recursive("/system/etc/ppp", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0555, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/etc/security", "uid", 0, "gid", 0, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/etc/security/cacerts", "uid", 0, "gid", 0, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata_recursive("/system/lib", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata_recursive("/system/vendor", "uid", 0, "gid", 2000, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata_recursive("/system/vendor/bin", "uid", 0, "gid", 2000, "dmode", 0755, "fmode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/vendor/bin/argosd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:argosd_exec:s0");
+set_metadata("/system/vendor/bin/at_distributor", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:at_distributor_exec:s0");
+set_metadata("/system/vendor/bin/connfwexe", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:connfwexe_exec:s0");
+set_metadata("/system/vendor/bin/ddexe", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:ddexe_exec:s0");
+set_metadata("/system/vendor/bin/hostapd", "uid", 1010, "gid", 1010, "mode", 0755, "capabilities", 0x3000, "selabel", "u:object_r:hostapd_exec:s0");
+set_metadata("/system/vendor/bin/hw", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/vendor/bin/hw/android.hardware.audio@2.0-service", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:hal_audio_default_exec:s0");
+set_metadata("/system/vendor/bin/hw/android.hardware.bluetooth@1.0-service", "uid", 1002, "gid", 1002, "mode", 0700, "capabilities", 0x801000, "selabel", "u:object_r:hal_bluetooth_default_exec:s0");
+set_metadata("/system/vendor/bin/hw/android.hardware.configstore@1.0-service", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:hal_configstore_default_exec:s0");
+set_metadata("/system/vendor/bin/hw/android.hardware.drm@1.0-service", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:hal_drm_default_exec:s0");
+set_metadata("/system/vendor/bin/hw/android.hardware.drm@1.0-service.widevine", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:hal_drm_default_exec:s0");
+set_metadata("/system/vendor/bin/hw/android.hardware.gatekeeper@1.0-service", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:hal_gatekeeper_default_exec:s0");
+set_metadata("/system/vendor/bin/hw/android.hardware.gnss@1.0-service", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:hal_gnss_default_exec:s0");
+set_metadata("/system/vendor/bin/hw/android.hardware.graphics.allocator@2.0-service", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:hal_graphics_allocator_default_exec:s0");
+set_metadata("/system/vendor/bin/hw/android.hardware.keymaster@3.0-service", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:hal_keymaster_default_exec:s0");
+set_metadata("/system/vendor/bin/hw/android.hardware.light@2.0-service", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:hal_light_default_exec:s0");
+set_metadata("/system/vendor/bin/hw/android.hardware.media.omx@1.0-service", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:mediacodec_exec:s0");
+set_metadata("/system/vendor/bin/hw/android.hardware.memtrack@1.0-service", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:hal_memtrack_default_exec:s0");
+set_metadata("/system/vendor/bin/hw/android.hardware.power@1.0-service", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:hal_power_default_exec:s0");
+set_metadata("/system/vendor/bin/hw/android.hardware.sensors@1.0-service", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:hal_sensors_default_exec:s0");
+set_metadata("/system/vendor/bin/hw/android.hardware.thermal@1.0-service", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:hal_thermal_default_exec:s0");
+set_metadata("/system/vendor/bin/hw/android.hardware.usb@1.0-service32", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/vendor/bin/hw/android.hardware.usb@1.0-service64", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/vendor/bin/hw/android.hardware.vr@1.0-service", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:hal_vr_default_exec:s0");
+set_metadata("/system/vendor/bin/hw/android.hardware.wifi@1.0-service", "uid", 1010, "gid", 1010, "mode", 0755, "capabilities", 0x13000, "selabel", "u:object_r:hal_wifi_default_exec:s0");
+set_metadata("/system/vendor/bin/hw/gpsd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:gpsd_exec:s0");
+set_metadata("/system/vendor/bin/hw/lhd", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:lhd_exec:s0");
+set_metadata("/system/vendor/bin/hw/macloader", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:macloader_exec:s0");
+set_metadata("/system/vendor/bin/hw/mfgloader", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:mfgloader_exec:s0");
+set_metadata("/system/vendor/bin/hw/rild", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:rild_exec:s0");
+set_metadata("/system/vendor/bin/hw/vendor.samsung.hardware.biometrics.fingerprint@2.1-service", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:hal_fingerprint_default_exec:s0");
+set_metadata("/system/vendor/bin/hw/vendor.samsung.hardware.gnss@1.0-service", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:hal_gnss_default_exec:s0");
+set_metadata("/system/vendor/bin/hw/vendor.samsung.hardware.miscpower@1.0-service", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:hal_power_default_exec:s0");
+set_metadata("/system/vendor/bin/hw/vendor.samsung.hardware.nfc@1.0-service", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:hal_nfc_default_exec:s0");
+set_metadata("/system/vendor/bin/hw/vendor.samsung.hardware.vibrator@1.0-service", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:hal_vibrator_default_exec:s0");
+set_metadata("/system/vendor/bin/hw/wldu", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/vendor/bin/hw/wpa_supplicant", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:hal_wifi_supplicant_default_exec:s0");
+set_metadata("/system/vendor/bin/mcDriverDaemon", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:mobicoredaemon_exec:s0");
+set_metadata("/system/vendor/bin/smdexe", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:smdexe_exec:s0");
+set_metadata("/system/vendor/bin/toybox_vendor", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:vendor_toolbox_exec:s0");
+set_metadata("/system/vendor/bin/vndservice", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/vendor/bin/vndservicemanager", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:vndservicemanager_exec:s0");
+set_metadata("/system/vendor/etc", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/vendor/etc/audio_effects.conf", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/vendor/firmware", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/vendor/lib", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/vendor/lib/egl", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata_recursive("/system/vendor/lib/hw", "uid", 0, "gid", 2000, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata_recursive("/system/vendor/lib/mediadrm", "uid", 0, "gid", 2000, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/vendor/lib/mediadrm/libdrmclearkeyplugin.so", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/vendor/lib/mediadrm/libwvdrmengine.so", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/vendor/lib/soundfx", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/vendor/media", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata_recursive("/system/xbin", "uid", 0, "gid", 2000, "dmode", 0755, "fmode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/etc/selinux/plat_mac_permissions.xml", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:mac_perms_file:s0");
+set_metadata("/system/info.extra", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:info_extra_system_file:s0");
+set_metadata("/system/vendor/app/mcRegistry", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:mobicore_vendor_file:s0");
+set_metadata("/system/vendor/app/mcRegistry/07010000000000000000000000000000.tlbin", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:mobicore_vendor_file:s0");
+set_metadata("/system/vendor/app/mcRegistry/08130000000000000000000000000000.tlbin", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:mobicore_vendor_file:s0");
+set_metadata("/system/vendor/app/mcRegistry/FFFFFFFF000000000000000000000001.drbin", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:mobicore_vendor_file:s0");
+set_metadata("/system/vendor/app/mcRegistry/ffffffff00000000000000000000000e.tlbin", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:mobicore_vendor_file:s0");
+set_metadata("/system/vendor/app/mcRegistry/ffffffff00000000000000000000000f.tlbin", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:mobicore_vendor_file:s0");
+set_metadata("/system/vendor/app/mcRegistry/ffffffff000000000000000000000012.tlbin", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:mobicore_vendor_file:s0");
+set_metadata("/system/vendor/app/mcRegistry/ffffffff000000000000000000000013.tlbin", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:mobicore_vendor_file:s0");
+set_metadata("/system/vendor/app/mcRegistry/ffffffff00000000000000000000002f.tlbin", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:mobicore_vendor_file:s0");
+set_metadata("/system/vendor/app/mcRegistry/ffffffffd0000000000000000000000a.tlbin", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:mobicore_vendor_file:s0");
+set_metadata("/system/vendor/app/mcRegistry/ffffffffd0000000000000000000000e.tlbin", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:mobicore_vendor_file:s0");
+set_metadata("/system/vendor/app/mcRegistry/ffffffffd00000000000000000000014.tlbin", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:mobicore_vendor_file:s0");
+set_metadata("/system/vendor/app/mcRegistry/ffffffffd00000000000000000000016.tlbin", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:mobicore_vendor_file:s0");
+set_metadata("/system/vendor/etc/selinux/apm", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:security_system_file:s0");
+set_metadata("/system/vendor/etc/selinux/apm/authorize.xml", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:security_system_file:s0");
+set_metadata_recursive("/data/app", "uid", 1000, "gid", 1000, "dmode", 0755, "fmode", 0644, "capabilities", 0x0);
+set_progress(0.800000);
+
+ui_print("Flashing Boot...");
+run_program("/sbin/mount", "/dev/block/platform/11120000.ufs/by-name/SYSTEM", "/system");
+package_extract_dir("saveg/noxxx", "/tmp");
+set_metadata_recursive("/tmp", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0755);
+if is_substring("G950", getprop("ro.boot.bootloader")) then
+run_program("/tmp/busybox", "dd", "if=/tmp/boot.img", "of=/dev/block/platform/11120000.ufs/by-name/BOOT");
+endif;
+if is_substring("G955", getprop("ro.boot.bootloader")) then
+run_program("/tmp/magic.sh");
+run_program("/tmp/busybox", "dd", "if=/tmp/boot.img", "of=/dev/block/platform/11120000.ufs/by-name/BOOT");
+endif;
+
+
+package_extract_dir("saveg/system", "/system");
+delete("/system/bin/secure_storage_daemon");
+delete("/system/bin/secure_storage_pm");
+delete("/system/etc/init/secure_storage_daemon.rc");
+delete("system/vendor/app/mcRegistry/ffffffffd0000000000000000000000a.tlbin");
+
+
+
+ifelse(is_mounted("/system"), unmount("/system"));
+ifelse(is_mounted("/data"), unmount("/data"));
+ifelse(is_mounted("/cache"), unmount("/cache"));
+
+ifelse(is_mounted("/system"), unmount("/system"));
+mount("ext4", "EMMC", "/dev/block/platform/11120000.ufs/by-name/SYSTEM", "/system");
+
+##KNOX
+
+### NEW IN OREO - UNTESTED
+delete_recursive("/system/priv-app/RubinVersion20"); #Customisation Service
+delete_recursive("/system/priv-app/SendHelpMessage"); #Safety assistance (Probably linked to emergency mode)
+delete_recursive("/system/app/KnoxAppsUpdateAgent"); #Knox Related
+delete_recursive("/system/app/KnoxAttestationAgent"); #Knox Related
+delete_recursive("/system/app/KnoxFolderContainer2"); #Knox Related
+delete_recursive("/system/app/KnoxRemoteContentsProvider"); #Knox Related
+delete_recursive("/system/app/KnoxSetupWizardClient"); #Knox Related
+delete_recursive("/system/app/KnoxSwitcher"); #Knox Related
+delete_recursive("/system/priv-app/ContainerAgent3"); #Workspace(com.samsung.android.knox.containeragent) OREO
+delete_recursive("/system/priv-app/KnoxCore"); #Personal home
+delete_recursive("/system/priv-app/KnoxDesktopLauncher"); #Knox-related*
+delete_recursive("/system/priv-app/knoxvpnproxyhandler"); #KnoxVpnPacProcessor
+delete_recursive("/system/container/KnoxBluetooth"); #Knox-related, new in OREO
+delete_recursive("/system/container/SharedDeviceKeyguard"); #Knox-related, SharedDeviceKeyguard - com.sec.enterprise.knox.shareddevice.keyguard OREO
+delete("/system/etc/permissions/knoxsdk_edm.xml");
+delete("/system/etc/permissions/knoxsdk_mdm.xml");
+delete("/knox_data");
+delete("/root/knox_changer");
+delete("/system/framework/knoxsdk.jar");
+delete("/system/framework/knoxvpnuidtag.jar");
+
+##ENTERPRISE SOLUTIONS
+delete_recursive("/system/app/SamsungDLPService"); #Samsung's Data Loss Prevention for enterprise, probably related to Knox
+delete_recursive("/system/app/EdmSimPinService"); #Enterprise Sim Pin Service
+delete_recursive("/system/priv-app/KLMSAgent"); #Samsung's device-for-corporate-use solution
+delete_recursive("/system/app/MDMApp"); #Mobile Device Management, enterprise solution to monitor work phones
+delete_recursive("/system/app/mldapchecker"); #MLDAPlog (Mobile Lightweight Directory Access Protocol?)
+
+##KNOX-RELATED
+delete_recursive("/system/app/BBCAgent"); #Knox-related*
+delete_recursive("/system/app/ESEServiceAgent"); #NFC-related thingy, part of Knox, link: seap.samsung.com/sdk/knox-ucm-sdk
+delete_recursive("/system/app/mldapchecker"); #MLDAP log (what's this? LDAP = Lightweight Directory Access Protocol, part of knox ?)
+delete_recursive("/system/app/UniversalMDMClient"); #Knox-related*
+delete_recursive("/system/container/KnoxBBCProvider"); #Knox-related*
+delete_recursive("/system/priv-app/SPDClient"); #SecurityPolicyData Client(Security policy updates), related to device security implemented by Samsung before Knox*
+
+##SECURE FOLDER
+delete_recursive("/system/app/SecureFolderSetupPage"); #Secure folder-related
+delete_recursive("/system/priv-app/SecureFolder"); #Samsung's Smart Solder, Knox is needed for this
+
+##MISC
+delete_recursive("/system/app/SecurityLogAgent"); #Root detection related, Knox-related
+delete_recursive("/system/app/SysScope"); #Samsung's root detection software
+delete_recursive("/system/container");
+delete_recursive("/system/containers");
+delete_recursive("/system/preload"); #SmartSwitch
+delete_recursive("/system/preloadedkiosk");
+delete_recursive("/system/preloadedsso");
+delete("/system/framework/timakeystore.jar");
+delete_recursive("/system/priv-app/PersonalPageService");
+delete_recursive("/system/etc/secure_storage/com.samsung.android.personalpage.service"); #Private Mode
+delete_recursive("/system/etc/secure_storage/com.samsung.android.personalpage.service!dex");
+delete_recursive("/system/etc/secure_storage/com.samsung.android.securitylogagentsystem");
+delete_recursive("/system/etc/secure_storage/com.samsung.android.securitylogagent");
+delete_recursive("/system/etc/secure_storage/com.samsung.android.securitylogagent!dex");
+delete_recursive("/system/etc/tima"); #Knox-related
+delete("/system/bin/tima_dump_log");
+delete("/system/tima_measurement_info");
+
+
+
+
+### SAMSUNG FEATURES
+
+##ACCOUNT
+delete_recursive("/system/priv-app/SamsungAccount_Dream"); #Samsung Account
+delete_recursive("/system/priv-app/SamsungAccount_Star"); #Samsung Account OREO
+delete("/system/etc/sysconfig/samsungaccount.xml"); #Power config for Samsung Account apk
+
+##ALLSHARE
+delete_recursive("/system/app/AllshareFileShare"); #File share option using AllShare
+delete_recursive("/system/app/AllshareMediaShare"); #Related to AllShare
+delete("/system/etc/permissions/allshare_library.xml"); #delete this kills Gallery3D
+delete("/system/framework/allshare.jar"); #delete this kills Gallery3D
+delete("/system/framework/oat/arm/allshare.odex"); #delete this kills Gallery3D
+delete("/system/framework/oat/arm64/allshare.odex"); #delete this kills Gallery3D
+
+##BIXBY-RELATED AND VOICE
+delete_recursive("/system/app/STalkback"); #Samsung TalkBack
+delete_recursive("/system/app/VisionIntelligence"); #Bixby Vision - The one used to recognize things in picture(?)*
+delete_recursive("/system/priv-app/Bixby"); #Bixby Voice
+delete_recursive("/system/priv-app/BixbyHome"); #Bixby Home OREO
+delete_recursive("/system/priv-app/BixbyAgentDummy"); #Bixby-related*
+delete_recursive("/system/priv-app/BixbyAgentStub"); #Bixby-related*
+delete_recursive("/system/priv-app/BixbyGlobalAction"); #Bixby-related*
+delete_recursive("/system/priv-app/BixbyPLMSync"); #Bixby-related*
+delete_recursive("/system/priv-app/BixbyVoiceInput"); #Bixby Voice [required for bixby button remap to work(?)]
+delete_recursive("/system/priv-app/DayLite"); #Bixby Home
+delete_recursive("/system/priv-app/SVoicePLM"); #Samsung Voice
+delete_recursive("/system/priv-app/SystemUIBixby"); #SystemUIBixby OREO
+delete_recursive("/system/priv-app/VisionCloudAgent"); #The one used to recognize things in picture(?)*
+delete_recursive("/system/priv-app/VisionProvider"); #VisionProvider OREO
+delete_recursive("/system/priv-app/VoiceServiceFramework"); #Samsung's Voice Service Framework*
+delete_recursive("/system/priv-app/VoiceWakeUp"); #Bixby's "Ok Google" clone (?)*
+delete_recursive("/system/voice");
+delete_recursive("/system/voicebargeindata");
+delete_recursive("/system/wakeupdata");
+delete_recursive("/system/voice");
+delete("/system/media/audio/ui/Bixby_BOS.ogg");
+
+##BILLING
+delete_recursive("/system/priv-app/AuthFramework"); #Required for Samsung Pay(?)*
+delete_recursive("/system/priv-app/AuthService_v2"); #Required for Samsung Pay(?)*
+delete_recursive("/system/priv-app/PaymentFramework"); #Samsung PaymentFramework
+delete_recursive("/system/priv-app/SamsungBilling"); #Samsung Pay
+delete_recursive("/system/priv-app/SKMSAgent"); #eSE-based NFC support, link: play.google.com/store/apps/details?id=com.skms.android.agent
+delete("/system/etc/permissions/com.samsung.android.feature.samsungauthframework.xml");
+delete("/system/etc/sysconfig/samsungauthframework.xml");
+
+##BROWSER
+delete_recursive("/system/app/SBrowserEdge"); #Samsung's browser
+delete("/system/etc/preferred-apps/browser.xml");
+
+##CALENDAR
+delete_recursive("/system/app/SamsungCalendar_Stable_4012"); #Samsung Calendar
+delete_recursive("/system/app/SamsungCalendar"); #Samsung Calendar OREO
+
+
+##CLOCK
+delete_recursive("/system/app/ClockPackage_N"); #Samsung Clock
+delete_recursive("/system/app/ClockPackage"); #Samsung Clock OREO
+
+##CLOUD
+delete_recursive("/system/app/CloudGateway2017"); #Connect to Samsung Cloud/GDrive option in My Files app
+delete_recursive("/system/priv-app/SamsungCloudDreamNewIcon"); #Related to Samsung Cloud*
+delete_recursive("/system/priv-app/SamsungCloudGreat"); #Samsung Cloud OREO
+
+##CONNECT
+delete_recursive("/system/app/SamsungConnect"); #Samsung Connect App
+delete_recursive("/system/priv-app/EasySetup"); #Samsung Connect setup(?)
+
+##CONTACTS
+delete_recursive("/system/priv-app/SamsungContactsStable"); #Samsung Contacts
+
+##EDGE PANEL
+delete_recursive("/system/app/ClipboardEdge"); #Clipboard addon
+delete_recursive("/system/app/ClipboardSaveService");
+delete_recursive("/system/app/ClipboardUIService");
+delete_recursive("/system/app/CnnPanel"); #CNN addon for Edge Panel
+delete_recursive("/system/app/CocktailQuickTool"); #Ruler and other tools thingy addon for Edge
+delete_recursive("/system/app/FlipboardBriefing"); #Flipboard addon for Edge
+delete_recursive("/system/app/SmartClipEdgeService"); #Some addon for Edge*
+delete_recursive("/system/app/YahooEdgeFinance"); #Yahoo Finance addon for Edge
+delete_recursive("/system/app/YahooEdgeSports"); #Yahoo Sports addon for Edge
+delete_recursive("/system/priv-app/CocktailBarService_v3"); #Related to some Clock thingy on Edge
+
+##EMAIL
+delete("/system/etc/sysconfig/samsungemail.xml");
+delete("/system/etc/preferred-apps/com.samsung.android.email.provider.xml");
+
+##EMERGENCY MODE & MAX BATTERY SAVING MODE
+delete_recursive("/system/app/EmergencyLauncher"); #Emergency Launcher
+delete_recursive("/system/app/EmergencyModeService"); #Emergency Mode Service
+delete_recursive("/system/app/EmergencyProvider"); #Emergency Provider
+
+##FLIP COVER & COVER RELATED
+delete_recursive("/system/priv-app/LedCoverAppDream"); #Probably related to Samsung's Led View Cover*
+delete_recursive("/system/priv-app/LedCoverService"); #Probably related to Samsung's Led View Cover*
+delete_recursive("/system/priv-app/MateAgent"); #Samsung Galaxy Friends
+delete("/system/etc/permissions/com.sec.feature.cover.clearcover.xml");
+delete("/system/etc/permissions/com.sec.feature.cover.flip.xml");
+delete("/system/etc/permissions/com.sec.feature.cover.nfc_authentication.xml"); #Samsung Accessory Manager
+delete("/system/etc/permissions/com.sec.feature.cover.nfcledcover.xml");
+delete("/system/etc/permissions/com.sec.feature.cover.sview.xml");
+delete("/system/etc/permissions/com.sec.feature.cover.xml");
+
+##GALLERY
+delete_recursive("/system/app/ApexService"); #Motion photo viewer
+delete_recursive("/system/app/InterativePanoramaViewer_WQHD"); #Virtual shot viewer
+delete_recursive("/system/app/MotionPanoramaViewer"); #Motion panorama viewer
+delete_recursive("/system/app/Panorama360Viewer"); #Surround shot
+delete_recursive("/system/app/SelfMotionManoramaViewer"); #Motion wide-angle selfie viewer
+delete_recursive("/system/app/StoryEditor_Dream_N"); #Samsung Story Editor
+delete_recursive("/system/priv-app/CMHProvider"); #Related to gallery and Highlight player
+delete_recursive("/system/priv-app/PhotoStudio_WQHD_Dream"); #Samsung's Photo Editor
+delete_recursive("/system/priv-app/PhotoStudio_WQHD_Star"); #Samsung's Photo Editor OREO
+delete_recursive("/system/priv-app/SecGallery2015"); #Samsung Gallery3D
+delete_recursive("/system/priv-app/StoryService"); #Create story out of your gallery photos
+
+##GALAXY APP
+delete_recursive("/system/priv-app/GalaxyApps_3xh"); #Samsung's App Store
+delete_recursive("/system/priv-app/GalaxyApps"); #Samsung's App Store OREO
+delete_recursive("/system/priv-app/GalaxyAppsWidget_Phone_Dream"); #Samsung's App Store widget
+
+##GALAXY FINDER
+delete_recursive("/system/priv-app/Finder_v7"); #S Finder
+delete_recursive("/system/priv-app/Finder_v8"); #S Finder OREO
+delete("/system/etc/permissions/com.sec.feature.findo.xml"); #Galaxy Finder
+delete("/system/etc/permissions/com.samsung.feature.galaxyfinder_v7.xml");
+
+##GAME MANAGER
+delete_recursive("/system/app/GameOptimizer"); #Game Optimizing Service
+delete_recursive("/system/priv-app/GameHome_Flumen"); #Game Launcher
+delete_recursive("/system/priv-app/GameTools_Dream"); #Game Tools
+delete("/system/framework/oat/arm/gamemanager.odex");
+delete("/system/framework/oat/arm64/gamemanager.odex");
+delete("/system/framework/gamemanager.jar");
+
+##GEAR
+delete_recursive("/system/app/GearManagerStub"); #Samsung Gear Manager
+delete_recursive("/system/priv-app/Gear360Editor_WQHD_Dream"); #Samsung's Gear 360 editor
+delete_recursive("/system/priv-app/Gear360Editor_WQHD_Star"); #Samsung's Gear 360 editor OREO
+
+
+##LOCATION-RELATED
+delete_recursive("/system/app/SLocation"); #Samsung location SDK, probably needed for Find my mobile*
+delete_recursive("/system/priv-app/Fmm");  #Samsung's Find My Mobile feature
+delete_recursive("/system/priv-app/NSFusedLocation_v3.0_DREAM"); #Samsung Locatoin SDK
+delete_recursive("/system/priv-app/NSFusedLocation_v3.2"); #Samsung Locatoin SDK OREO
+delete_recursive("/system/priv-app/RadioBasedLocation");
+delete_recursive("/system/priv-app/RadioBasedLocationManager");
+delete_recursive("/system/priv-app/SamsungPositioning"); #SamsungPositioning
+delete("/system/etc/permissions/com.sec.feature.slocation_level3.xml");
+delete_recursive("/system/lib/slocation"); #Samsung location library
+delete_recursive("/system/lib64/slocation"); #Samsung location library
+
+##MESSAGING
+delete_recursive("/system/priv-app/Messaging_SEP81");  #Samsung's Messaging App
+
+##MIRRORING
+delete_recursive("/system/app/SmartMirroring"); #Samsung's Smart Mirroring
+delete_recursive("/system/app/withTV"); #View on TV feature
+delete_recursive("/system/app/WfdBroker"); #Samsung Smart View
+
+##MIRROR LINK/CARMODE
+delete_recursive("/system/app/CarmodeStub"); #Car mode*
+delete_recursive("/system/app/MirrorLink"); #MirrorLink, link: http://www.mirrorlink.com/
+delete("/system/etc/permissions/com.samsung.feature.mirrorlink_fw_level4.xml");
+
+##MY Files
+delete_recursive("/system/priv-app/SecMyFiles2017");  #Samsung's My Files
+
+##PASS
+delete_recursive("/system/priv-app/SamsungPass_1.1"); #Samsung's AutoFill app
+delete("/system/etc/sysconfig/samsungpassapp.xml");
+
+##PROFESSIONAL AUDIO
+delete_recursive("/system/app/SapaAudioConnectionService"); #Samsung's professional audio creation thingy*
+delete_recursive("/system/app/SapaMonitor"); #Samsung's professional audio creation thingy*
+delete("/system/etc/sapa_feature.xml");
+
+##PUSH SERVICE
+delete_recursive("/system/priv-app/SPPPushClient_Prod"); #Samsung Push Service
+delete_recursive("/system/priv-app/SPPPushClient"); #Samsung Push Service OREO
+delete("/system/etc/sysconfig/samsungpushservice.xml");
+
+##SETTINGS
+delete_recursive("/system/app/EasyOneHand3"); #One-handed mode
+delete_recursive("/system/app/MhdrService"); #Probably related to Video Enhancer*
+delete_recursive("/system/app/sveservice"); #Probably related to Video Enhancer*
+delete_recursive("/system/app/UniversalSwitch"); #Required for 'Universal Switch' inside Accessibility>Direct access
+delete_recursive("/system/priv-app/AccessControl_N"); #Interation control
+delete_recursive("/system/priv-app/AssistantMenu_N");
+delete_recursive("/system/priv-app/ColorBlind_N"); #Required for 'Color adjustment' inside Accessibility>Vision
+delete_recursive("/system/priv-app/ColorAdjustment"); #Colour adjustment OREO
+delete_recursive("/system/priv-app/EmergencyInfo"); #Emergency Information*
+delete_recursive("/system/app/ShareLink_2017"); #Samsung's Link Sharing, link: https://play.google.com/store/apps/details?id=com.samsung.android.app.simplesharing
+delete_recursive("/system/app/LinkSharing_v40"); #Samsung's Link Sharing OREO
+delete_recursive("/system/app/bootagent"); #Related to smart card and knox
+delete_recursive("/system/app/SmartcardService"); #Related to smart card*
+delete_recursive("/system/priv-app/SmartcardManager"); #Smart card manager, probably related to NFC card(?)*
+delete("/system/etc/permissions/com.sec.smartcard.auth.xml");
+delete("/system/framework/secsmartcard.jar");
+delete("/system/framework/oat/arm/secsmartcard.odex");
+delete("/system/framework/oat/arm64/secsmartcard.odex");
+delete_recursive("/system/app/SCPMClient_N"); #Related to Smart Manager
+delete_recursive("/system/priv-app/SmartManager_v5_DeviceSecurity"); #McAfee Security in Device Maintenance
+delete_recursive("/system/priv-app/SmartManager_v6_DeviceSecurity"); #McAfee Security in Device Maintenance OREO
+delete_recursive("/system/etc/secure_storage/com.samsung.android.sm.devicesecurity");
+delete_recursive("/system/etc/secure_storage/com.samsung.android.sm.devicesecurity!dex");
+delete_recursive("/system/etc/secure_storage/com.samsung.android.sm.devicesecurity.tcm");
+delete_recursive("/system/etc/secure_storage/com.samsung.android.sm.devicesecurity.tcm!dex");
+delete_recursive("/system/priv-app/SmartManager_v5"); #Device Maintenance main app
+delete_recursive("/system/app/SmartSwitchAgent"); #Samsung Smart Switch Agent for phone to phone connection
+#delete_recursive("/system/priv-app/wssyncmlnps2"); #Required by Smart Switch Desktop support
+delete_recursive("/system/priv-app/HealthService");#Samsung's Health Service app
+delete_recursive("/system/etc/secure_storage/com.sec.android.service.health");
+delete_recursive("/system/etc/secure_storage/com.sec.android.service.health!dex");
+delete("/system/etc/permissions/shealth_sw_pedometer_paused.xml");
+delete_recursive("/system/app/AppLinker"); #Might be related to theme*
+delete_recursive("/system/priv-app/SamsungThemes_v4"); #Samsung Themes
+delete_recursive("/system/priv-app/ThemeCenter"); #Samsung's Theme Center
+delete_recursive("/system/app/AdvSoundDetector2015"); #Recognize baby cry,etc
+delete_recursive("/system/app/BeamService");  #S Beam
+delete("/system/media/audio/ui/S_Beam_end.ogg");
+delete("/system/media/audio/ui/S_Beam_error.ogg");
+delete("/system/media/audio/ui/S_Beam_start.ogg");
+delete_recursive("/system/app/DictDiotek_update"); #Dictionary for Samsung
+delete_recursive("/system/app/DictDiotekForSec"); #Dictionary for Samsung OREO
+delete_recursive("/system/app/EasymodeContactsWidget81"); #Easy Mode's contacts widget
+delete_recursive("/system/app/CoreApps_SDK_2017"); #Enhanced features
+delete_recursive("/system/app/CoreApps_EOP"); #Enhanced features OREO
+delete_recursive("/system/app/HandwritingService"); #Samsung's hand writing service
+delete_recursive("/system/app/HiyaService"); #Samsung Spam Block feature related OREO
+delete_recursive("/system/app/MyGalaxy"); #An app that provide you some Samsung contents
+delete_recursive("/system/app/SafetyInformation"); #Safety Information*
+delete_recursive("/system/app/SamsungConcierge_stub"); #http://www.samsung.com/sg/samsungconcierge/
+delete_recursive("/system/app/SamsungTTS"); #Samsung Text To Speech
+#delete_recursive("/system/app/SmartCallProvider"); #Samsung's Smart Call, http://www.samsung.com/global/galaxy/apps/smart-call/
+delete_recursive("/system/app/SmartFittingService"); #Obsolete youtube fit to screen app
+delete_recursive("/system/app/SmartReminder"); #Samsung's Smart Reminder app
+delete_recursive("/system/app/SPdfNote"); #Samsung's draw on pdf app
+delete_recursive("/system/app/SplitSoundService"); #Maybe required for Samsung SoundAssistant
+delete_recursive("/system/app/SPrintSpooler7"); #Samsung Print Spooler
+delete_recursive("/system/app/SPrintSpooler"); #Samsung Print Spooler OREO
+delete_recursive("/system/app/UserManual"); #User Manual
+delete_recursive("/system/app/WebManual"); #Web manual app
+delete_recursive("/system/priv-app/BeaconManager"); #Nearby Device Scanning in Settings OREO
+delete_recursive("/system/priv-app/ConfigUpdater"); #DESCRIPTION_NEEDED
+delete_recursive("/system/priv-app/Crane"); #Required for Call+
+delete_recursive("/system/priv-app/CSC");
+delete_recursive("/system/priv-app/DesktopModeUiService"); #Samsung DeX
+delete_recursive("/system/priv-app/EnhanceService");
+delete_recursive("/system/priv-app/OMCAgent"); #Configuration Updater
+delete_recursive("/system/priv-app/OMCAgent5"); #Configuration Updater OREO
+delete_recursive("/system/priv-app/UnifiedProfile"); #Samsung Profile
+delete_recursive("/system/priv-app/SamsungMagnifier3"); #Required to use your phone's camera as a magnifier
+delete_recursive("/system/priv-app/KeyguardWallpaperUpdator"); #Required for lockscreen wallpaper changing feature
+delete_recursive("/system/priv-app/WallpaperCropper"); #Samsung's Wallpaper Cropper
+delete_recursive("/system/priv-app/WallpaperCropper2"); #Wallpapers OREO
+delete("/system/etc/permissions/com.sec.feature.barcode_emulator.xml"); #Barcode Emulator
+delete("/system/media/audio/ui/SideSync_Connected.ogg"); #SideSync
+delete_recursive("/system/app/SlowMotion_Dream_N"); #Slow and fastmotion video player and editor
+delete_recursive("/system/app/VideoEditorLite_Dream_N"); #Video Editor
+delete_recursive("/system/app/VideoTrimmer_Dream"); #Video trimmer
+delete_recursive("/system/priv-app/SamsungVideoPlayer2016"); #Samsung Video Player
+delete("/system/framework/videoeditor.jar");
+delete("/system/framework/oat/arm/videoeditor_sdk.odex");
+delete("/system/framework/oat/arm64/videoeditor_sdk.odex");
+delete_recursive("/system/priv-app/Upday"); #Some news app, link: play.google.com/store/apps/details?id=de.axelspringer.yana
+delete_recursive("/system/priv-app/Ignite-Globe_2.2.003-996_releaseProduction");
+delete_recursive("/system/app/yandex.search"); #Yandex search engine
+delete_recursive("/system/app/ubank_samsung"); #DESCRIPTION_NEEDED
+delete_recursive("/system/app/shahid"); #No idea what's this
+delete_recursive("/system/app/NaverV_N");
+delete_recursive("/system/app/AntHalService"); #Related to  ANT wireless*
+delete_recursive("/system/app/ANTPlusPlugins"); #play.google.com/store/apps/details?id=com.dsi.ant.plugins.antplus
+delete_recursive("/system/app/ANTPlusTest"); #Related to  ANT wireless*
+delete_recursive("/system/priv-app/ANTRadioService"); #play.google.com/store/apps/details?id=com.dsi.ant.service.socket
+delete("/system/etc/permissions/com.dsi.ant.antradio_library.xml");
+delete("/system/framework/com.dsi.ant.antradio_library.jar");
+delete("/system/framework/oat/arm/com.dsi.ant.antradio_library.odex");
+delete("/system/framework/oat/arm64/com.dsi.ant.antradio_library.odex");
+#delete_recursive("/system/app/CarrierDefaultApp"); #CarrierDefaultApp
+delete_recursive("/system/app/My_Singtel_4.4_com.singtel.mysingtel"); #Singtel carrier app
+delete_recursive("/system/priv-app/CarrierConfig"); #com.android.carrierconfig
+delete_recursive("/system/priv-app/Ignite-Singtel_1.7.306_releaseProduction"); #Singtel carrier app
+delete("/system/framework/com.verizon.epdg.jar"); #Verizon-related
+delete("/system/framework/oat/arm/com.verizon.epdg.odex"); #Verizon-related
+delete("/system/framework/oat/arm64/com.verizon.epdg.odex"); #Verizon-related
+delete("/system/etc/permissions/com.verizon.net.xml"); #Verizon-related
+delete("/system/framework/com.verizon.net.jar"); #Verizon-related
+delete("/system/framework/oat/arm/com.verizon.net.odex"); #Verizon-related
+delete("/system/framework/oat/arm64/com.verizon.net.odex"); #Verizon-related
+delete("/system/etc/permissions/com.verizon.phone.xml"); #Verizon-related
+delete("/system/framework/com.verizon.phone.jar"); #Verizon-related
+delete("/system/framework/oat/arm/com.verizon.phone.odex"); #Verizon-related
+delete("/system/framework/oat/arm64/com.verizon.phone.odex"); #Verizon-related
+delete("/system/etc/permissions/com.verizon.ptt.api.xml"); #Verizon-related
+delete("/system/framework/com.verizon.ptt.api.jar"); #Verizon-related
+delete("/system/framework/oat/arm/com.verizon.ptt.api.odex"); #Verizon-related
+delete("/system/framework/oat/arm64/com.verizon.ptt.api.odex"); #Verizon-related
+delete_recursive("/system/app/ImsSettings"); #Something related to some messaging service
+delete_recursive("/system/priv-app/imsservice"); #Ims-related
+delete_recursive("/system/priv-app/ImsLogger+"); #Ims-related
+delete_recursive("/system/priv-app/ImsLogger"); #Ims-related OREO
+delete_recursive("/system/priv-app/ImsTelephonyService"); #Ims-related
+delete_recursive("/system/priv-app/IPService"); #VoIP-related
+delete_recursive("/system/priv-app/VoWifiSPG"); #Voice over WiFi
+delete_recursive("/system/app/EpdgService"); #Evolved Packet Data Gateway, related to network security*
+delete_recursive("/system/priv-app/EpdgService"); #Evolved Packet Data Gateway, related to network security* OREO
+delete_recursive("/system/priv-app/EpdgService"); #Evolved Packet Data Gateway, related to network security* OREO
+delete_recursive("/system/priv-app/SmartEpdgTestApp"); #Evolved Packet Data Gateway, related to network security*
+delete_recursive("/system/etc/epdg");
+delete_recursive("/system/app/Facebook_stub"); #Facebook app
+delete_recursive("/system/app/FactoryCameraFB"); #Probably Facebook related(?)
+delete_recursive("/system/app/FBAppManager_NS"); #Facebook related
+delete_recursive("/system/priv-app/AutomationTest_FB"); #Probably Facebook-related(?)*
+delete_recursive("/system/app/AutomationTest_FB"); #Probably Facebook-related(?)* (Automation Test) OREO
+delete_recursive("/system/priv-app/FBInstaller_NS"); #Facebook-related
+delete_recursive("/system/priv-app/FBServices"); #Facebook-related
+delete_recursive("/system/priv-app/serviceModeApp_FB"); #Probably Facebook related
+delete_recursive("/system/app/ChocoEUKor"); #Font
+delete_recursive("/system/app/CoolEUKor"); #FONT
+delete_recursive("/system/app/Foundation"); #FONT
+delete_recursive("/system/app/RoseEUKor"); #Font
+delete_recursive("/system/app/ChromeCustomizations");
+delete_recursive("/system/app/Gmail2"); #Google's Gmail
+delete_recursive("/system/app/GooglePrintRecommendationService"); #Related to printer(?)
+delete_recursive("/system/app/Maps"); #Google Map
+delete_recursive("/system/app/YouTube"); #Youtube app
+delete_recursive("/system/priv-app/LinkedIn_SamsungStub");
+delete_recursive("/system/app/SilentLog");
+delete_recursive("/system/priv-app/intelligenceservice2"); #Maybe to the creepy CarrierIQ(?)
+delete_recursive("/system/etc/secure_storage/com.samsung.android.intelligenceservice");
+delete_recursive("/system/etc/secure_storage/com.samsung.android.intelligenceservice!dex");
+delete_recursive("/system/app/MSSkype_stub"); #Microsoft Skype
+delete_recursive("/system/priv-app/Excel_SamsungStub"); #Microsoft Excel
+delete_recursive("/system/priv-app/OneDrive_Samsung_v2"); #Microsoft Onedrive
+delete_recursive("/system/priv-app/PowerPoint_SamsungStub"); #Microsoft PowerPoint
+delete_recursive("/system/priv-app/PowerPoint_SecureFolder");
+delete_recursive("/system/priv-app/Word_SamsungStub"); #Microsoft Word
+delete_recursive("/system/app/BasicDreams"); #Screen Saver
+delete_recursive("/system/app/PhotoTable"); #Photo screen saver
+delete_recursive("/system/priv-app/GoogleDaydreamCustomization"); #com.samsung.daydream.cust OREO
+delete_recursive("/system/app/Hs20Provider"); #Related to wifi scan timing*
+delete_recursive("/system/priv-app/ManagedProvisioning"); #Work profile setup
+delete_recursive("/system/app/CtsShimPrebuilt"); #https://source.android.com/compatibility/cts/
+delete_recursive("/system/priv-app/CtsShimPrivPrebuilt"); #https://source.android.com/compatibility/cts/
+delete_recursive("/system/app/vsimservice"); #Virtual Sim Service
+delete_recursive("/system/priv-app/SOAgent");
+delete_recursive("/system/priv-app/FotaAgent");
+delete("/system/etc/fota.cer");
+delete_recursive("/system/app/BluetoothTest");
+delete_recursive("/system/app/SecFactoryPhoneTest");
+delete_recursive("/system/app/WlanTest");
+delete_recursive("/system/priv-app/DeviceTest");
+delete_recursive("/system/priv-app/HwModuleTest");
+delete_recursive("/system/priv-app/IrisUserTest");
+delete_recursive("/system/priv-app/LTETest");
+delete_recursive("/system/app/Daydream_VrOemReceiver"); #Daydream VR*
+delete_recursive("/system/app/GoogleVrServices"); #Google VR Services
+delete_recursive("/system/priv-app/Daydream_VrCore"); #Daydream VR(?)*
+delete_recursive("/system/priv-app/RNB"); #Gear VR Service
+delete_recursive("/system/priv-app/RNBShell"); #VR Shell*
+delete_recursive("/system/priv-app/VRSetupWizardStub"); #Related to VR
+delete("/system/etc/security/oculus.crt");
+delete("/system/etc/sysconfig/google_vr_build.xml");
+delete_recursive("/system/app/aligned_signed_secRCS_BB"); #Non-existence junk
+delete_recursive("/system/app/apps_brasil_signed_aligned"); #Non-existence junk
+delete_recursive("/system/app/papergarden"); #Papergarden
+delete_recursive("/system/app/SecurityProviderSEC"); #Security storage
+delete_recursive("/system/app/TuiService"); #Some security thing by Trustonic, more info: www.tuicool.com/articles/miq2ay
+delete_recursive("/system/priv-app/Fresco_1.0"); #Probably this http://frescolib.org/
+delete_recursive("/system/app/RootPA"); #Mobogenie market app
+delete_recursive("/system/priv-app/SNS_v2_N"); #Social Network Service*
+delete_recursive("/system/app/SnsImageCache_N"); #Probably related to Social Network Service*
+delete_recursive("/system/priv-app/UIBCVirtualSoftkey"); #Floating button(?)*
+delete("/system/etc/irremovable_list.txt");
+delete("/system/etc/ASKSTS.xml");
+delete("/system/info.extra");
+delete_recursive("/system/hidden");
+delete("/system/etc/removable_preload.txt");
+delete_recursive("/system/etc/default-permissions");
+delete("/system/etc/purenandpackages.txt");
+delete("/system/etc/purenandpackages_pref.txt");
+delete("/system/etc/nwk_info.xml");
+delete("/system/media/audio/ui/Air_Command_Hover_Focus.ogg");
+delete("/system/media/audio/ui/Pen_att_noti1.ogg"); #S Pen
+delete("/system/media/audio/ui/Pen_att_noti2.ogg"); #S Pen
+delete("/system/media/audio/ui/Pen_att_noti3.ogg"); #S Pen
+delete("/system/media/audio/ui/Pen_det_alert.ogg"); #S Pen
+delete("/system/media/audio/ui/Pen_det_noti1.ogg"); #S Pen
+delete("/system/media/audio/ui/Pen_det_noti2.ogg"); #S Pen
+delete("/system/media/audio/ui/Pen_det_noti3.ogg"); #S Pen
+delete_recursive("/system/app/Adaway"); #Adaway in CRAP by SoLdieR9312
+delete_recursive("/system/app/BCService");
+delete_recursive("/system/app/BluetoothMidiService"); #Bluetooth MIDI Service
+delete_recursive("/system/app/BuiltInPrintService"); #Default print service
+delete_recursive("/system/app/CompanionDeviceManager"); #Companion Device Manager
+delete_recursive("/system/app/CtsShimPrebuilt");
+delete_recursive("/system/app/DownloadableKeystore");
+delete_recursive("/system/app/DRParser");
+delete_recursive("/system/app/PartnerBookmarksProvider");
+delete_recursive("/system/app/BookmarkProvider");
+delete_recursive("/system/app/PlayAutoInstallConfig");
+delete_recursive("/system/app/Preconfig");
+delete_recursive("/system/app/RcsSettings");
+delete_recursive("/system/app/SamsungExperienceService");
+delete_recursive("/system/app/TasksProvider");
+delete_recursive("/system/priv-app/AutoPreconfig");
+delete_recursive("/system/priv-app/DCMService");
+delete_recursive("/system/priv-app/DiagMonAgent");
+delete_recursive("/system/priv-app/MediaLearningPlatform"); #mlp
+delete_recursive("/system/priv-app/PreloadInstaller"); #Application Installer
+delete_recursive("/system/priv-app/SecSetupWizard2015"); #Samsung setup wizard
+delete_recursive("/system/priv-app/SecSetupWizard_Global");
+delete_recursive("/system/priv-app/SEMFactoryApp"); #SEMFactoryApp
+delete_recursive("/system/priv-app/SharedStorageBackup");
+delete_recursive("/system/priv-app/StubUpdater");
+delete_recursive("/system/priv-app/SVCAgent");
+delete_recursive("/system/priv-app/Tag");
+ifelse(is_mounted("/system"), unmount("/system"));
+ui_print("");
+set_progress(1.000000);
+ui_print("Update Success");
