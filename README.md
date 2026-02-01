@@ -1,5 +1,7 @@
 Android version : 8.0.0
+
 Samsung Experience version : 9
+
 Android Security Patch Level : January 2026
 
 Samsung Experience Reworked ROM for Galaxy S8 (Exynos) :
