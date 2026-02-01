@@ -18,6 +18,14 @@ Improving responsiveness
 
 Enhancing the overall smoothness of the user interface
 
+In this build, all Samsung pre-installed applications have been removed and replaced with their Google counterparts to provide a cleaner and more streamlined Android experience.
+
+This means the system uses core Google apps for everyday functionality, reducing system bloat and improving overall performance and storage efficiency.
+
+Additionally, the Google Play Store is already integrated into the ROM, allowing users to download apps immediately after setup without needing to flash additional packages.
+
+This approach ensures a lighter system while keeping full access to the essential Google services and ecosystem.
+
 Rather than changing the identity of Samsung Experience, this project aims to refine it, making it feel lighter, faster, and more efficient while keeping the classic Samsung look and features.
 
 ✨ Key Improvements :
