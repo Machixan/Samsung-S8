@@ -1,4 +1,4 @@
-Android version : 8.0.0
+Android Version : 8.0.0
 
 Samsung Experience version : 9
 
