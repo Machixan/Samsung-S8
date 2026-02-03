@@ -58,6 +58,11 @@ Keep the Samsung Experience feel, but make it better.
 
 Samsung Galaxy S8 (Exynos variants)
 
+⚙️ Kernel : 
+
+This rom use the NX Kernel : https://github.com/Noxxxious/Upgrade
+Auhor : https://github.com/Noxxxious/
+
 ⚠️ Disclaimer :
 
-This is a custom ROM and is provided as-is. Flashing custom firmware always carries some risk. Make sure to create a full backup before installing.
+Flashing custom firmware always carries some risk. Make sure to create a full backup before installing.
