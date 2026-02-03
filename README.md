@@ -1,3 +1,6 @@
+My first custom ROM! A Samsung Experience ROM based on Android 8.0 (Oreo) for the Galaxy S8 (SM-G950F).
+It fully supports the latest bootloader/binary so no downgrade is needed.
+
 Rom Created on : 2026-02-01
 
 Last Rom Updated : 2026-02-01
@@ -7,8 +10,6 @@ Android Version : 8.0.0
 Samsung Experience version : 9
 
 Android Security Patch Level : January 2026
-
-Samsung Experience Reworked ROM for Galaxy S8 (Exynos) :
 
 Base : Official Samsung firmware
 
