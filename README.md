@@ -65,6 +65,7 @@ Samsung Galaxy S8 (Exynos variants)
 ⚙️ Kernel : 
 
 This rom use the NX Kernel : https://github.com/Noxxxious/Upgrade
+
 Auhor : https://github.com/Noxxxious/
 
 ⚠️ Disclaimer :
