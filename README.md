@@ -1,3 +1,6 @@
+Rom Created on : 2026-02-01
+Last Rom Updated : 2026-02-01
+
 Android Version : 8.0.0
 
 Samsung Experience version : 9
